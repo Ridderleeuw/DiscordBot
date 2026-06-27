@@ -172,7 +172,6 @@ async def whitelist_logic(playername):
 
     if response.status_code == 200:
         player_data = response.json()
-        # Laad bestaande whitelist
         whitelist = []
         if os.path.exists('whitelist.json'):
             with open('whitelist.json', 'r') as file:

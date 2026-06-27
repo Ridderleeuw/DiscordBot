@@ -18,6 +18,5 @@ rgbToken = os.getenv("RGBPass")
 oldToken = os.getenv("OldPass")
 
 
-#startup
 tokens(rgbToken, oldToken) #send the tokens to the logics.py file
-run_bot(token) #send the tokens to the bot
+run_bot(token) #send the Discord tokens to the bot

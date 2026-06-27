@@ -4,25 +4,14 @@ import asyncio
 import datetime
 from logics import ssh_request_async, whitelist_logic, startserver, whitelist_update, shutdownserver, server_status, discover_Minecraft_servers, screen_check, load_discovered_servers
 import os
+from ZinloosStuff.ZinloosCommand import register as register_zinloos
 
-#notities
-#1 maak een plan van aanpak
-#2 maak een flowchart van de bot   <ongoing>
-#3 <done>whitelist fixen       zorg ervoor dat het op rgb update 
-#4 <Done> startserver fixen   
-#5 <Done> stakeholders request toevoegen
-#6 <Done> auto discorvery van de servers maken (ook dat de commando's automatisch worden toegevoegd aan de bot)
-#7 <done> moet een screen server hebben zodat we terug kunnen in de terminal.
-#8 <done>minecraft server stoppen en daarna mogelijk maken om de server mee aftesluiten.
-#9 /list function maken die naar screen <name> kijkt
-#10 zorg ervoor dat als 1 screen al runt dat je die niet nog een keer kan starten op dezelfde server
-#11 laat de server een /list doen voordat hij de server afsluit zodat de server niet aflsuit als de speler online is.
-#12 palworld server toevoegen en update mogelijkheid maken
-#couldhave# steam servers toevoegen zonder bemaning 
+
 
 intents = discord.Intents.default()
 bot = commands.Bot(command_prefix='*', intents=intents, help_command=None)
 intents.message_content = True
+register_zinloos(bot) #export botimport naar zinlooscommands
 
 
 def run_bot(token):
@@ -164,25 +153,22 @@ async def whitelist(ctx):
         return message.author == ctx.author and message.channel == ctx.channel
 
     try:
-        # Wait for the player name
         response = await bot.wait_for('message', check=check, timeout=30)
         playername = response.content.strip()  # Extract the player name
         #regel dat playname, maar 1 word mag zijn zonder extenties of iets
-        def is_valid_minecraft_name(name):
-            if not (3 <= len(name) <= 16):
+        def is_valid_minecraft_name(playername):
+            if not (3 <= len(playername) <= 16):
                 return False
-            for c in name:
+            for c in playername:
                 if not (c.isalnum() or c == "_"):
-                    return False
+                    return False            
             return True
-
-        # Gebruik:
-        if not is_valid_minecraft_name(playername):
-            await ctx.send("Ongeldige spelernaam. Gebruik 3-16 letters, cijfers of underscores (geen spaties of tekens).")
-            print("Naam is niet valid")
-            return
-        print(f"Whitelist aanvraag voor speler: {playername}")
-        await ctx.send(f"Wil je {playername} whitelisten? (ja/nee)")
+        
+        if is_valid_minecraft_name(playername):
+            await ctx.send(f"Wil je {playername} whitelisten? (ja/nee)")
+        else:
+            await ctx.send("Spelernaam niet geldig.")
+            return ## kill command
 
         confirmation = await bot.wait_for('message', check=check, timeout=30)
         if confirmation.content.strip().lower() in ["yes", "y", "ja"]:
@@ -338,15 +324,3 @@ async def autodiscovery(ctx):
         await ctx.send("Auto-discovery succesvol:\n" + "\n".join(f"• {k}" for k in result.keys()))
     else:
         await ctx.send("Geen servers gevonden.")
-
-## zinloze stuf
-
-@bot.event #vroeg tygo    veranderd de link naar een download video (maybe)
-async def on_message(message):
-    if message.author == bot.user:
-        return
-    if "kill myself" in message.content.lower():
-        await message.channel.send('https://cunnyx.com/realMax0r/status/1912444281601814819')
-    await bot.process_commands(message)
-
-

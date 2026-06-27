@@ -1,0 +1,24 @@
+Vergeet niet de bot help functie heeft een geadvaneert functie
+
+       # om venv te starten                .\.venv\Scripts\activate  
+
+
+
+
+
+
+Planning wat nog gedaan moet owrden
+#1 maak een plan van aanpak
+#2 maak een flowchart van de bot   <ongoing>
+#3 <done>whitelist fixen       zorg ervoor dat het op rgb update 
+#4 <Done> startserver fixen   
+#5 <Done> stakeholders request toevoegen
+#6 <Done> auto discorvery van de servers maken (ook dat de commando's automatisch worden toegevoegd aan de bot)
+#7 <done> moet een screen server hebben zodat we terug kunnen in de terminal.
+#8 <done>minecraft server stoppen en daarna mogelijk maken om de server mee aftesluiten.
+#9 /list function maken die naar screen <name> kijkt
+#10 zorg ervoor dat als 1 screen al runt dat je die niet nog een keer kan starten op dezelfde server
+#11 laat de server een /list doen voordat hij de server afsluit zodat de server niet aflsuit als de speler online is.
+#12 palworld server toevoegen en update mogelijkheid maken
+#couldhave# steam servers toevoegen zonder bemaning 
+
